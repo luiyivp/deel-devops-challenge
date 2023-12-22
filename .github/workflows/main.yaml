@@ -44,10 +44,7 @@ jobs:
           location: ${{ env.GKE_ZONE }}
           credentials: ${{ secrets.GKE_SA_KEY }}
 
-      - name: "Deploy"
-        uses: "deliverybot/helm@v1"
+      - name: Deploy
+        uses: WyriHaximus/github-action-helm3@v3
         with:
-          release: "app"
-          namespace: "apps"
-          chart: "helm"
-          value-files: "helm/values.yaml"
+          exec: helm upgrade app ./helm --install --wait --atomic --namespace=apps --values=./helm/values.yaml
