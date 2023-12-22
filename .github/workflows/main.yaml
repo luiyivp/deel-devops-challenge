@@ -51,4 +51,6 @@ jobs:
       - name: Deploy
         uses: WyriHaximus/github-action-helm3@v3
         with:
-          exec: helm upgrade app ./helm --install --wait --atomic --namespace=apps --values=./helm/values.yaml --set image.tag=${{ github.sha }}
+          exec: |
+            helm dependency build
+            helm upgrade app ./helm --install --wait --atomic --namespace=apps --values=./helm/values.yaml --set image.tag=${{ github.sha }}
