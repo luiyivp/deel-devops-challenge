@@ -35,6 +35,7 @@ def get_all_ips():
 
     return jsonify({'ips': entries_list})
 
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
